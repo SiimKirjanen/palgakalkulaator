@@ -1,21 +1,30 @@
 "use client";
 
 import {
+  SET_EMPLOYEE_UNEMPLOYMENT_INSURANCE,
+  SET_EMPLOYER_UNEMPLOYMENT_INSURANCE,
+  SET_PENSION_PILLAR,
   SET_SALARY_CALCULATOR_INPUT,
   SET_SALARY_CALCULATOR_INPUT_TYPE,
 } from "@/constants";
 import { reducer } from "@/reducers/salary-calculator-reducer";
-import { SalaryType } from "@/types/salary";
+import { pensionPillarType, SalaryType } from "@/types/salary";
 import React, { createContext, ReactNode, useReducer } from "react";
 
 type SalaryCalculatorState = {
   salaryInput: string;
   salaryInputType: SalaryType;
+  pensionPillar: pensionPillarType;
+  employerUnemploymentInsurance: boolean;
+  employeeUnemploymentInsurance: boolean;
 };
 
 const initialSalaryState: SalaryCalculatorState = {
   salaryInput: "0",
   salaryInputType: SalaryType.GROSS,
+  pensionPillar: pensionPillarType.NO_PILLAR,
+  employerUnemploymentInsurance: true,
+  employeeUnemploymentInsurance: true,
 };
 
 type Action =
@@ -26,6 +35,18 @@ type Action =
   | {
       type: typeof SET_SALARY_CALCULATOR_INPUT_TYPE;
       payload: { salaryInputType: SalaryType };
+    }
+  | {
+      type: typeof SET_PENSION_PILLAR;
+      payload: { pensionPillar: pensionPillarType };
+    }
+  | {
+      type: typeof SET_EMPLOYER_UNEMPLOYMENT_INSURANCE;
+      payload: { selected: boolean };
+    }
+  | {
+      type: typeof SET_EMPLOYEE_UNEMPLOYMENT_INSURANCE;
+      payload: { selected: boolean };
     };
 
 type Dispatch = (action: Action) => void;

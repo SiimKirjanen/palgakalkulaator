@@ -1,19 +1,26 @@
 import { Checkbox } from "@/components/ui/checkbox";
+import { SET_SALARY_CALCULATOR_INPUT_TYPE } from "@/constants";
+import { SalaryCalculatorContext } from "@/providers/SalaryContextProvider";
 import { SalaryType } from "@/types/salary";
+import { useContext } from "react";
 
 type Props = {
   label: string;
   salaryType: SalaryType;
-  currentType: SalaryType;
-  onChange: (type: SalaryType) => void;
 };
-export const SalaryTypeCheckbox = ({
-  label,
-  salaryType,
-  currentType,
-  onChange,
-}: Props) => {
+export const SalaryTypeCheckbox = ({ label, salaryType }: Props) => {
+  const {
+    state: { salaryInputType: selectedSalaryInputType },
+    salaryDispatch,
+  } = useContext(SalaryCalculatorContext);
   const checkBoxId = `salary-type-${salaryType}`;
+
+  const handleSalaryTypeChange = () => {
+    salaryDispatch({
+      type: SET_SALARY_CALCULATOR_INPUT_TYPE,
+      payload: { salaryInputType: salaryType },
+    });
+  };
 
   return (
     <div className="flex items-center gap-2 justify-center">
@@ -24,8 +31,8 @@ export const SalaryTypeCheckbox = ({
         {label}
       </label>
       <Checkbox
-        checked={currentType === salaryType}
-        onCheckedChange={() => onChange(salaryType)}
+        checked={selectedSalaryInputType === salaryType}
+        onCheckedChange={handleSalaryTypeChange}
         id={checkBoxId}
         className="cursor-pointer"
       />
