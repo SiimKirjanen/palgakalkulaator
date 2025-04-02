@@ -12,11 +12,23 @@ export const SalaryTypeCheckbox = ({
   salaryType,
   currentType,
   onChange,
-}: Props) => (
-  <Checkbox
-    checked={currentType === salaryType}
-    onCheckedChange={() => onChange(salaryType)}
-  >
-    {label}
-  </Checkbox>
-);
+}: Props) => {
+  const checkBoxId = `salary-type-${salaryType}`;
+
+  return (
+    <div className="flex items-center gap-2 justify-center">
+      <label
+        className="text-sm font-medium text-gray-700 cursor-pointer"
+        htmlFor={checkBoxId}
+      >
+        {label}
+      </label>
+      <Checkbox
+        checked={currentType === salaryType}
+        onCheckedChange={() => onChange(salaryType)}
+        id={checkBoxId}
+        className="cursor-pointer"
+      />
+    </div>
+  );
+};

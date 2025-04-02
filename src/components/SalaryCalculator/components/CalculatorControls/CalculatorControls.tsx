@@ -22,37 +22,33 @@ export const CalculatorControls = () => {
     });
   };
 
-  const handleSalaryInputChange = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    const value = event.target.value;
-
-    if (!SALARY_INPUT_REGEX.test(value)) {
+  const handleSalaryInputChange = (input: string) => {
+    if (!SALARY_INPUT_REGEX.test(input)) {
       return; // Ignore invalid input
     }
 
     salaryDispatch({
       type: SET_SALARY_CALCULATOR_INPUT,
-      payload: { salaryInput: value },
+      payload: { salaryInput: input },
     });
   };
 
   return (
-    <div className="flex gap-4">
+    <div className="flex gap-4 justify-center">
       <SalaryTypeCheckbox
-        label="Employer Cost"
+        label="Tööandja kulu"
         salaryType={SalaryType.EMPLOYERCOST}
         currentType={salaryInputType}
         onChange={handleSalaryTypeChange}
       />
       <SalaryTypeCheckbox
-        label="Gross"
+        label="Brutopalk"
         salaryType={SalaryType.GROSS}
         currentType={salaryInputType}
         onChange={handleSalaryTypeChange}
       />
       <SalaryTypeCheckbox
-        label="Net"
+        label="Netopalk"
         salaryType={SalaryType.NET}
         currentType={salaryInputType}
         onChange={handleSalaryTypeChange}
@@ -60,6 +56,7 @@ export const CalculatorControls = () => {
       <SalaryInput
         salaryInput={salaryInput}
         handleSalaryInputChange={handleSalaryInputChange}
+        className="w-32"
       />
     </div>
   );

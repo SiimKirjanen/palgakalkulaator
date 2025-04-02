@@ -6,7 +6,6 @@ import { CalculatorResults } from "./components/CalculatorResults/CalculatorResu
 export const SalaryCalculator = () => {
   return (
     <div>
-      <h1 className="text-2xl font-bold">Palgakalkulaator</h1>
       <CalculatorControls />
       <CalculatorResults />
     </div>
