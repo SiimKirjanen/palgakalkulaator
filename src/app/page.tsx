@@ -1,9 +1,9 @@
-import { Input } from "@/components/ui/input";
+import { SalaryCalculator } from "@/components/SalaryCalculator/SalaryCalculator";
 
 export default function Home() {
   return (
-    <div className="flex flex-col min-h-screen p-24">
-      <Input />
+    <div>
+      <SalaryCalculator />
     </div>
   );
 }
