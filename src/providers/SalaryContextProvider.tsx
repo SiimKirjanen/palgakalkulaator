@@ -1,21 +1,32 @@
 "use client";
 
-import { SET_CALCULATOR_SALARY } from "@/constants";
+import {
+  SET_SALARY_CALCULATOR_INPUT,
+  SET_SALARY_CALCULATOR_INPUT_TYPE,
+} from "@/constants";
 import { reducer } from "@/reducers/salary-calculator-reducer";
+import { SalaryType } from "@/types/salary";
 import React, { createContext, ReactNode, useReducer } from "react";
 
 type SalaryCalculatorState = {
-  siteURL: string;
+  salaryInput: string;
+  salaryInputType: SalaryType;
 };
 
 const initialSalaryState: SalaryCalculatorState = {
-  siteURL: "",
+  salaryInput: "0",
+  salaryInputType: SalaryType.GROSS,
 };
 
-type Action = {
-  type: typeof SET_CALCULATOR_SALARY;
-  payload: { siteURL: string };
-};
+type Action =
+  | {
+      type: typeof SET_SALARY_CALCULATOR_INPUT;
+      payload: { salaryInput: string };
+    }
+  | {
+      type: typeof SET_SALARY_CALCULATOR_INPUT_TYPE;
+      payload: { salaryInputType: SalaryType };
+    };
 
 type Dispatch = (action: Action) => void;
 

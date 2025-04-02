@@ -1,4 +1,7 @@
-import { SET_CALCULATOR_SALARY } from "@/constants";
+import {
+  SET_SALARY_CALCULATOR_INPUT,
+  SET_SALARY_CALCULATOR_INPUT_TYPE,
+} from "@/constants";
 import {
   Action,
   SalaryCalculatorState,
@@ -9,9 +12,16 @@ const reducer = (
   action: Action
 ): SalaryCalculatorState => {
   switch (action.type) {
-    case SET_CALCULATOR_SALARY: {
+    case SET_SALARY_CALCULATOR_INPUT: {
       return {
         ...state,
+        salaryInput: action.payload.salaryInput,
+      };
+    }
+    case SET_SALARY_CALCULATOR_INPUT_TYPE: {
+      return {
+        ...state,
+        salaryInputType: action.payload.salaryInputType,
       };
     }
     default:
