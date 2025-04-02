@@ -18,7 +18,7 @@ export const EmployerUnemploymentInsuranceCheckbox = () => {
   };
 
   return (
-    <div className="flex items-center gap-2 justify-center">
+    <div className="flex flex-col items-center gap-2 justify-center">
       <label
         className="text-sm font-medium text-gray-700 cursor-pointer"
         htmlFor={checkBoxId}

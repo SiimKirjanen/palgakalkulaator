@@ -7,8 +7,8 @@ import { EmployeeUnemploymentInsuranceCheckbox } from "../EmployeeUnemploymentIn
 
 export const CalculatorControls = () => {
   return (
-    <div>
-      <div className="flex gap-4 justify-center mb-4">
+    <div className="mb-6">
+      <div className="flex flex-col md:flex-row gap-4 justify-center items-center mb-6">
         <SalaryTypeCheckbox
           label="Tööandja kulu"
           salaryType={SalaryType.EMPLOYERCOST}

@@ -33,10 +33,10 @@ export const PensionPillarSelection = () => {
           <SelectValue placeholder="Ei kasuta" />
         </SelectTrigger>
         <SelectContent>
-          <SelectItem value="null">Ei kasuta</SelectItem>
-          <SelectItem value="2%">2%</SelectItem>
-          <SelectItem value="4%">4%</SelectItem>
-          <SelectItem value="6%">6%</SelectItem>
+          <SelectItem value="0">Ei kasuta</SelectItem>
+          <SelectItem value="0.02">2%</SelectItem>
+          <SelectItem value="0.04">4%</SelectItem>
+          <SelectItem value="0.06">6%</SelectItem>
         </SelectContent>
       </Select>
     </div>

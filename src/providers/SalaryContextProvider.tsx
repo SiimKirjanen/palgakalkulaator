@@ -14,7 +14,7 @@ import React, { createContext, ReactNode, useReducer } from "react";
 type SalaryCalculatorState = {
   salaryInput: string;
   salaryInputType: SalaryType;
-  pensionPillar: pensionPillarType;
+  pensionPillar: string;
   employerUnemploymentInsurance: boolean;
   employeeUnemploymentInsurance: boolean;
 };

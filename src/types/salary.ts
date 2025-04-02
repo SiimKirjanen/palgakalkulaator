@@ -5,10 +5,10 @@ enum SalaryType {
 }
 
 enum pensionPillarType {
-  PERCENT_2_PILLAR = "2%",
-  PERCENT_4_PILLAR = "4%",
-  PERCENT_6_PILLAR = "6%",
-  NO_PILLAR = "null",
+  PERCENT_2_PILLAR = "0.02",
+  PERCENT_4_PILLAR = "0.04",
+  PERCENT_6_PILLAR = "0.06",
+  NO_PILLAR = "0",
 }
 
 export { SalaryType, pensionPillarType };
