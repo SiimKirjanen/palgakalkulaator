@@ -8,6 +8,7 @@ import {
   calculateNetFromEmployerCost,
   calculateNetFromGross,
   calculatGrossFromNet,
+  roundToTwoDecimals,
 } from "./salary";
 
 describe("calculateNetFromGross", () => {
@@ -166,5 +167,27 @@ describe("calculatGrossFromNet", () => {
     );
 
     expect(grossSalary).toBe(2000);
+  });
+});
+
+describe("roundToTwoDecimals", () => {
+  it("should round up when the value is 1999.99", () => {
+    expect(roundToTwoDecimals(1999.99)).toBe(1999.99);
+  });
+
+  it("should round up when the value is 1999.995", () => {
+    expect(roundToTwoDecimals(1999.995)).toBe(2000);
+  });
+
+  it("should round down when the value is 2033.194", () => {
+    expect(roundToTwoDecimals(2033.194)).toBe(2033.19);
+  });
+
+  it("should round up when the value is 2033.195", () => {
+    expect(roundToTwoDecimals(2033.195)).toBe(2033.2);
+  });
+
+  it("should return the same value for integers", () => {
+    expect(roundToTwoDecimals(2000)).toBe(2000);
   });
 });

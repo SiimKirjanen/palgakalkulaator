@@ -7,7 +7,6 @@ import {
 } from "@/components/ui/select";
 import { SET_PENSION_PILLAR } from "@/constants";
 import { SalaryCalculatorContext } from "@/providers/SalaryContextProvider";
-import { PensionPillars } from "@/types/salary";
 import { useContext } from "react";
 
 export const PensionPillarSelection = () => {
@@ -16,10 +15,10 @@ export const PensionPillarSelection = () => {
     salaryDispatch,
   } = useContext(SalaryCalculatorContext);
 
-  const handleValueChange = (value: PensionPillars) => {
+  const handleValueChange = (value: string) => {
     salaryDispatch({
       type: SET_PENSION_PILLAR,
-      payload: { pensionPillar: value },
+      payload: { pensionPillar: Number(value) },
     });
   };
 
@@ -28,7 +27,7 @@ export const PensionPillarSelection = () => {
       <label className="text-sm font-medium text-slate-700 block mb-1">
         Kogumispension (II sammas)
       </label>
-      <Select onValueChange={handleValueChange} value={pensionPillar}>
+      <Select onValueChange={handleValueChange} value={String(pensionPillar)}>
         <SelectTrigger className="w-[180px]">
           <SelectValue placeholder="Ei kasuta" />
         </SelectTrigger>

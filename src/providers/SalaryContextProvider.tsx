@@ -1,5 +1,6 @@
 "use client";
 
+import React, { createContext, ReactNode, useReducer } from "react";
 import {
   SET_EMPLOYEE_UNEMPLOYMENT_INSURANCE,
   SET_EMPLOYER_UNEMPLOYMENT_INSURANCE,
@@ -8,13 +9,12 @@ import {
   SET_SALARY_CALCULATOR_INPUT_TYPE,
 } from "@/constants";
 import { reducer } from "@/reducers/salary-calculator-reducer";
-import { PensionPillars, SalaryType } from "@/types/salary";
-import React, { createContext, ReactNode, useReducer } from "react";
+import { SalaryType } from "@/types/salary";
 
 type SalaryCalculatorState = {
   salaryInput: string;
   salaryInputType: SalaryType;
-  pensionPillar: PensionPillars;
+  pensionPillar: number;
   employerUnemploymentInsurance: number;
   employeeUnemploymentInsurance: number;
 };
@@ -22,7 +22,7 @@ type SalaryCalculatorState = {
 const initialSalaryState: SalaryCalculatorState = {
   salaryInput: "0",
   salaryInputType: SalaryType.GROSS,
-  pensionPillar: "0",
+  pensionPillar: 0,
   employerUnemploymentInsurance: 0,
   employeeUnemploymentInsurance: 0,
 };
@@ -38,7 +38,7 @@ type Action =
     }
   | {
       type: typeof SET_PENSION_PILLAR;
-      payload: { pensionPillar: PensionPillars };
+      payload: { pensionPillar: number };
     }
   | {
       type: typeof SET_EMPLOYER_UNEMPLOYMENT_INSURANCE;

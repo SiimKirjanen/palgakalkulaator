@@ -5,10 +5,24 @@ export const CalculatorResults = () => {
 
   return (
     <div className="flex flex-col gap-4 justify-center items-center">
-      <h2 className="text-1xl font-semibold text-center ">Tulemus</h2>
-      <div>Bruto {grossSalary}</div>
-      <div>Neto: {netSalary}</div>
-      <div>Tööandja: {employerCost}</div>
+      <ResultBox title="Bruto" value={grossSalary} />
+      <ResultBox title="Neto" value={netSalary} />
+      <ResultBox title="Tööandja kulu" value={employerCost} />
+    </div>
+  );
+};
+
+type ResultBoxProps = {
+  title: string;
+  value: number;
+};
+const ResultBox = ({ title, value }: ResultBoxProps) => {
+  return (
+    <div className="flex flex-col items-center">
+      <h3 className="text-2xl">{title}</h3>
+      <div>
+        {value} <span className="text-gray-700">€</span>
+      </div>
     </div>
   );
 };

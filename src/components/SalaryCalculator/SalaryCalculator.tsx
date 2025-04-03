@@ -1,5 +1,6 @@
 "use client";
 
+import { AISuggestion } from "./components/AISuggestion/AISuggestion";
 import { CalculatorControls } from "./components/CalculatorControls/CalculatorControls";
 import { CalculatorResults } from "./components/CalculatorResults/CalculatorResults";
 
@@ -11,6 +12,7 @@ export const SalaryCalculator = () => {
       </h1>
       <CalculatorControls />
       <CalculatorResults />
+      <AISuggestion />
     </div>
   );
 };

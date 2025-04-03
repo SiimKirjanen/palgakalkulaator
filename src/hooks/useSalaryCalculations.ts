@@ -14,12 +14,11 @@ export const useSalaryCalculations = () => {
   } = useContext(SalaryCalculatorContext);
 
   const salaryInputNumber = parseFloat(salaryInput);
-  const pensionPillarNumber = parseFloat(pensionPillar);
 
   const { netSalary, grossSalary, employerCost } = calculateSalaries({
     salaryInput: salaryInputNumber,
     salaryInputType,
-    pensionPillar: pensionPillarNumber,
+    pensionPillar,
     employerUnemploymentInsurance,
     employeeUnemploymentInsurance,
   });

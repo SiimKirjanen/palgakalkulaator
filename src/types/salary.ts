@@ -4,6 +4,4 @@ enum SalaryType {
   EMPLOYERCOST = "employerCost",
 }
 
-type PensionPillars = "0" | "0.02" | "0.04" | "0.06";
-
-export { SalaryType, type PensionPillars };
+export { SalaryType };
