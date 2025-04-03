@@ -4,11 +4,6 @@ enum SalaryType {
   EMPLOYERCOST = "employerCost",
 }
 
-enum pensionPillarType {
-  PERCENT_2_PILLAR = "0.02",
-  PERCENT_4_PILLAR = "0.04",
-  PERCENT_6_PILLAR = "0.06",
-  NO_PILLAR = "0",
-}
+type PensionPillars = "0" | "0.02" | "0.04" | "0.06";
 
-export { SalaryType, pensionPillarType };
+export { SalaryType, type PensionPillars };

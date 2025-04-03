@@ -7,7 +7,7 @@ import {
 } from "@/components/ui/select";
 import { SET_PENSION_PILLAR } from "@/constants";
 import { SalaryCalculatorContext } from "@/providers/SalaryContextProvider";
-import { pensionPillarType } from "@/types/salary";
+import { PensionPillars } from "@/types/salary";
 import { useContext } from "react";
 
 export const PensionPillarSelection = () => {
@@ -16,7 +16,7 @@ export const PensionPillarSelection = () => {
     salaryDispatch,
   } = useContext(SalaryCalculatorContext);
 
-  const handleValueChange = (value: pensionPillarType) => {
+  const handleValueChange = (value: PensionPillars) => {
     salaryDispatch({
       type: SET_PENSION_PILLAR,
       payload: { pensionPillar: value },

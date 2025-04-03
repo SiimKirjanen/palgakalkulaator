@@ -1,6 +1,6 @@
-import { calculateNetFromGross } from "@/lib/salary";
-import { SalaryCalculatorContext } from "@/providers/SalaryContextProvider";
 import { useContext } from "react";
+import { calculateSalaries } from "@/lib/salary";
+import { SalaryCalculatorContext } from "@/providers/SalaryContextProvider";
 
 export const useSalaryCalculations = () => {
   const {
@@ -16,13 +16,17 @@ export const useSalaryCalculations = () => {
   const salaryInputNumber = parseFloat(salaryInput);
   const pensionPillarNumber = parseFloat(pensionPillar);
 
-  const netSalary = calculateNetFromGross(
-    salaryInputNumber,
+  const { netSalary, grossSalary, employerCost } = calculateSalaries({
+    salaryInput: salaryInputNumber,
+    salaryInputType,
+    pensionPillar: pensionPillarNumber,
     employerUnemploymentInsurance,
-    pensionPillarNumber
-  );
+    employeeUnemploymentInsurance,
+  });
 
   return {
     netSalary,
+    grossSalary,
+    employerCost,
   };
 };
