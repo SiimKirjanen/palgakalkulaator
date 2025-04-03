@@ -6,9 +6,16 @@ const calculatGrossFromNet = (
   employeeUnemploymentInsurance: number,
   pensionPillar: number
 ) => {
-  return (
-    netSalary / (1 - employeeUnemploymentInsurance - pensionPillar - INCOME_TAX)
+  const grossSalary = roundToTwoDecimals(
+    netSalary /
+      (1 -
+        INCOME_TAX -
+        pensionPillar * (1 - INCOME_TAX) -
+        employeeUnemploymentInsurance * (1 - INCOME_TAX))
   );
+  console.log(grossSalary);
+
+  return grossSalary;
 };
 
 const calculateEmployerCostFromNet = (
@@ -26,21 +33,26 @@ const calculateEmployerCostFromNet = (
   const employerUnemploymentInsuranceSum =
     grossSalary * employerUnemploymentInsurance;
 
-  return grossSalary + socialTaxSum + employerUnemploymentInsuranceSum;
+  return roundToTwoDecimals(
+    grossSalary + socialTaxSum + employerUnemploymentInsuranceSum
+  );
 };
 
 const calculateNetFromEmployerCost = (
   employerCost: number,
   employerUnemploymentInsurance: number,
+  employeeUnemploymentInsurance: number,
   pensionPillar: number
 ) => {
+  console.log(employerUnemploymentInsurance);
+  console.log(employeeUnemploymentInsurance);
   const grossSlarary = calculateGrossFromEmployerCost(
     employerCost,
     employerUnemploymentInsurance
   );
   return calculateNetFromGross(
     grossSlarary,
-    employerUnemploymentInsurance,
+    employeeUnemploymentInsurance,
     pensionPillar
   );
 };
@@ -49,27 +61,29 @@ const calculateGrossFromEmployerCost = (
   employerCost: number,
   employerUnemploymentInsurance: number
 ) => {
-  return employerCost / (1 + SOCIAL_TAX + employerUnemploymentInsurance);
+  return roundToTwoDecimals(
+    employerCost / (1 + SOCIAL_TAX + employerUnemploymentInsurance)
+  );
 };
 
 const calculateNetFromGross = (
   grossSalary: number,
-  employerUnemploymentInsurance: number,
+  employeeUnemploymentInsurance: number,
   pensionPillar: number
 ) => {
   const pensionTaxSum = grossSalary * pensionPillar;
-  const employerUnemploymentInsuranceSum =
-    grossSalary * employerUnemploymentInsurance;
+  const employeeUnemploymentInsuranceSum =
+    grossSalary * employeeUnemploymentInsurance;
   const taxableAmount =
-    grossSalary - employerUnemploymentInsuranceSum - pensionTaxSum;
+    grossSalary - employeeUnemploymentInsuranceSum - pensionTaxSum;
   const incomeTaxSum = taxableAmount * INCOME_TAX;
   const netSalary =
     grossSalary -
-    employerUnemploymentInsuranceSum -
+    employeeUnemploymentInsuranceSum -
     pensionTaxSum -
     incomeTaxSum;
 
-  return netSalary;
+  return roundToTwoDecimals(netSalary);
 };
 
 const calculateEmployerCostFromGross = (
@@ -134,6 +148,7 @@ const calculateSalaries = ({
         netSalary: calculateNetFromEmployerCost(
           salaryInput,
           employerUnemploymentInsurance,
+          employeeUnemploymentInsurance,
           pensionPillar
         ),
         grossSalary: calculateGrossFromEmployerCost(
@@ -149,10 +164,16 @@ const calculateSalaries = ({
   }
 };
 
+const roundToTwoDecimals = (value: number): number => {
+  return Math.round(value * 100) / 100;
+};
+
 export {
   calculatGrossFromNet,
   calculateNetFromGross,
   calculateEmployerCostFromGross,
   calculateNetFromEmployerCost,
   calculateSalaries,
+  calculateGrossFromEmployerCost,
+  roundToTwoDecimals,
 };
