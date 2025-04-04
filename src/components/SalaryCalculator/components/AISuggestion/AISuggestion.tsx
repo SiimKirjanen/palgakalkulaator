@@ -1,7 +1,7 @@
 import { useCountdown } from "@/hooks/useCountdown";
 import { useSalaryCalculations } from "@/hooks/useSalaryCalculations";
 import { SalaryType } from "@/types/salary";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Oval } from "react-loader-spinner";
 
 export const AISuggestion = () => {
@@ -9,12 +9,21 @@ export const AISuggestion = () => {
   const [loading, setLoading] = useState(false);
   const { grossSalary } = useSalaryCalculations();
   const countdown = useCountdown(grossSalary, 5, handleCountdownFinish);
+  const abortControllerRef = useRef<AbortController | null>(null);
 
   useEffect(() => {
+    if (abortControllerRef.current) {
+      abortControllerRef.current.abort();
+    }
+
     setAiAnswer(null);
+    setLoading(false);
   }, [grossSalary]);
 
   async function handleCountdownFinish() {
+    const controller = new AbortController();
+    abortControllerRef.current = controller;
+
     try {
       setLoading(true);
       const response = await fetch("/api/ai", {
@@ -26,6 +35,7 @@ export const AISuggestion = () => {
           input: grossSalary,
           inputType: SalaryType.GROSS,
         }),
+        signal: controller.signal,
       });
 
       if (!response.ok) {
@@ -35,12 +45,24 @@ export const AISuggestion = () => {
       const data = await response.json();
       setAiAnswer(data.response);
     } catch (error) {
-      console.error("Error during API call:", error);
-      setAiAnswer(
-        "AI ei saanud Teie palga kohta infot anda. Proovige hiljem uuesti."
-      );
+      if (error instanceof Error) {
+        if (error.name === "AbortError") {
+          console.log("Request was aborted.");
+        } else {
+          console.error("Error during API call:", error.message);
+          setAiAnswer(
+            "AI ei saanud Teie palga kohta infot anda. Proovige hiljem uuesti."
+          );
+        }
+      } else {
+        console.error("An unknown error occurred:", error);
+        setAiAnswer(
+          "AI ei saanud Teie palga kohta infot anda. Proovige hiljem uuesti."
+        );
+      }
     } finally {
       setLoading(false);
+      abortControllerRef.current = null;
     }
   }
 
