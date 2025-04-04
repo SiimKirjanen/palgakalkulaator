@@ -4,7 +4,7 @@ export const CalculatorResults = () => {
   const { netSalary, grossSalary, employerCost } = useSalaryCalculations();
 
   return (
-    <div className="flex flex-col gap-4 justify-center items-center">
+    <div className="flex flex-col gap-4 justify-center items-center mb-7">
       <ResultBox title="Bruto" value={grossSalary} />
       <ResultBox title="Neto" value={netSalary} />
       <ResultBox title="Tööandja kulu" value={employerCost} />

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 export const useCountdown = (
-  triggerValue: string | number,
+  triggerValue: number,
   duration: number,
   onCountdownFinish: () => void
 ) => {
@@ -16,17 +16,20 @@ export const useCountdown = (
   }, [triggerValue, duration]);
 
   useEffect(() => {
-    if (countdown !== null && countdown > 0) {
-      const timer = setTimeout(() => {
+    if (countdown === null || countdown <= 0) {
+      return;
+    }
+
+    const timer = setTimeout(() => {
+      if (countdown === 1) {
+        onCountdownFinish();
+        setCountdown(null);
+      } else {
         setCountdown((prev) => (prev !== null ? prev - 1 : null));
-      }, 1000);
+      }
+    }, 1000);
 
-      return () => clearTimeout(timer);
-    }
-
-    if (countdown === 0) {
-      onCountdownFinish();
-    }
+    return () => clearTimeout(timer);
   }, [countdown, onCountdownFinish]);
 
   return countdown;
