@@ -13,7 +13,6 @@ const calculatGrossFromNet = (
         pensionPillar * (1 - INCOME_TAX) -
         employeeUnemploymentInsurance * (1 - INCOME_TAX))
   );
-  console.log(grossSalary);
 
   return grossSalary;
 };
@@ -44,8 +43,6 @@ const calculateNetFromEmployerCost = (
   employeeUnemploymentInsurance: number,
   pensionPillar: number
 ) => {
-  console.log(employerUnemploymentInsurance);
-  console.log(employeeUnemploymentInsurance);
   const grossSlarary = calculateGrossFromEmployerCost(
     employerCost,
     employerUnemploymentInsurance

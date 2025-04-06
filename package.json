@@ -40,5 +40,11 @@
     "tailwindcss": "^4",
     "ts-node": "^10.9.2",
     "typescript": "^5"
+  },
+  "overrides": {
+    "react-loader-spinner": {
+      "react": "^18 || ^19",
+      "react-dom": "^18 || ^19"
+    }
   }
 }

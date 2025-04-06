@@ -13,7 +13,7 @@ export const useSalaryCalculations = () => {
     },
   } = useContext(SalaryCalculatorContext);
 
-  const salaryInputNumber = parseFloat(salaryInput);
+  const salaryInputNumber = parseFloat(salaryInput) || 0;
 
   const { netSalary, grossSalary, employerCost } = calculateSalaries({
     salaryInput: salaryInputNumber,
